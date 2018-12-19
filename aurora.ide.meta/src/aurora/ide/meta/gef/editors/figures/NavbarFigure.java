@@ -67,85 +67,59 @@ public class NavbarFigure extends Figure {
 		g.drawImage(bgImg, new Rectangle(bgImg.getBounds()), bounds);
 		// |<
 		Rectangle r1 = new Rectangle(0, 0, 16, 16);
-		Rectangle r2 = new Rectangle(bounds.x + 4, bounds.y + 4, 16, 16);
+		Rectangle r2 = new Rectangle(bounds.x + bounds.width -380, bounds.y + 4, 16, 16);
 		g.drawImage(navImg, r1, r2);
 		// <
 		r1.y = 32;
 		r2.x += bounds.height;
 		g.drawImage(navImg, r1, r2);
-		// sep
-		Rectangle r3 = new Rectangle(r2.x + bounds.height, bounds.y, 2,
-				bounds.height);
-		g.drawImage(sepImg, new Rectangle(sepImg.getBounds()), r3);
-		g.setForegroundColor(ColorConstants.BLACK);
-		Dimension dim = FigureUtilities.getTextExtents(texts[0], getFont());
-		int nextX = r3.x + r3.width + 2;
-		g.drawString(texts[0], nextX, bounds.y + (bounds.height - dim.height)
-				/ 2);
-		// rect
-		nextX += dim.width + 2;
+		int nextX = r2.x + r2.width + 2;	
+//		 rect
+		nextX += 2;
 		g.setForegroundColor(ColorConstants.GRID_COLUMN_GRAY);
 		g.setBackgroundColor(ColorConstants.WHITE);
 		Rectangle r4 = new Rectangle(nextX, bounds.y + 3, 30, bounds.height - 6);
 		g.fillRectangle(r4);
 		g.drawRectangle(r4);
-		nextX += r4.width + 5;
+		// 总页数
+		Dimension dim = FigureUtilities.getTextExtents("/10", getFont());
+		nextX =  r4.x + r4.width + 10;
 		g.setForegroundColor(ColorConstants.BLACK);
-		dim = FigureUtilities.getTextExtents(texts[1], getFont());
-		g.drawString(texts[1], nextX, bounds.y + (bounds.height - dim.height)
-				/ 2);
-		// sep
-		nextX += dim.width + 2;
-		r3 = new Rectangle(nextX, bounds.y, 2, bounds.height);
-		g.drawImage(sepImg, new Rectangle(sepImg.getBounds()), r3);
-		// >
+		g.drawString("/10", nextX, bounds.y + (bounds.height - dim.height)/ 2);
+		
+		nextX += r4.width;
+		g.setForegroundColor(ColorConstants.BLACK);
+//		// >
 		r1.y = 48;
-		r2.x = nextX + 4;
+		r2.x = nextX;
 		g.drawImage(navImg, r1, r2);
 		// >|
 		r1.y = 16;
 		r2.x += bounds.height;
 		g.drawImage(navImg, r1, r2);
-		// refresh
-		r1.y = 64;
-		r2.x += bounds.height;
-		g.drawImage(navImg, r1, r2);
-		// sep
-		nextX = r2.x + bounds.height + 2;
-		r3 = new Rectangle(nextX, bounds.y, 2, bounds.height);
-		g.drawImage(sepImg, new Rectangle(sepImg.getBounds()), r3);
-		nextX += 5;
-		g.setForegroundColor(ColorConstants.BLACK);
-		dim = FigureUtilities.getTextExtents(texts[2], getFont());
-		g.drawString(texts[2], nextX, bounds.y + (bounds.height - dim.height)
-				/ 2);
-		// rect
-		nextX += dim.width + 2;
+		
+		nextX += r2.width+30;
 		g.setForegroundColor(ColorConstants.GRID_COLUMN_GRAY);
 		g.setBackgroundColor(ColorConstants.WHITE);
-		r4 = new Rectangle(nextX, bounds.y + 3, 46, bounds.height - 6);
-		g.fillRectangle(r4);
-		g.drawImage(combImg, new Rectangle(combImg.getBounds()), new Rectangle(
-				r4.x + 29, r4.y + 1, 16, 16));
-		g.drawRectangle(r4);
-		nextX = r4.x + r4.width + 5;
+		Rectangle r3 = new Rectangle(nextX, bounds.y + 3, 30, bounds.height - 6);
+		g.fillRectangle(r3);
+		g.drawRectangle(r3);
+		
+		nextX += r2.width+30;
 		g.setForegroundColor(ColorConstants.BLACK);
-		dim = FigureUtilities.getTextExtents(texts[3], getFont());
-		g.drawString(texts[3], nextX, bounds.y + (bounds.height - dim.height)
+		dim = FigureUtilities.getTextExtents("每页", getFont());
+		g.drawString("每页", nextX, bounds.y + (bounds.height - dim.height)
 				/ 2);
-		// sep
-		nextX += dim.width + 5;
-		r3 = new Rectangle(nextX, bounds.y, 2, bounds.height);
-		g.drawImage(sepImg, new Rectangle(sepImg.getBounds()), r3);
-		// last..
-		nextX += 3;
-		dim = FigureUtilities.getTextExtents(texts[4], getFont());
-		if (bounds.width - nextX < dim.width)
-			return;
-		g.drawString(texts[4], bounds.x + bounds.width - dim.width - 3,
-				bounds.y + (bounds.height - dim.height) / 2);
-		g.setForegroundColor(ColorConstants.GRID_COLUMN_GRAY);
-		g.drawLine(bounds.getTopLeft(), bounds.getTopRight());
+		
+		nextX +=dim.width+ 10;
+		g.setForegroundColor(ColorConstants.BLACK);
+		dim = FigureUtilities.getTextExtents("显示条目 1 - 4 共 4", getFont());
+		g.drawString("显示条目 1 - 4 共 4", nextX, bounds.y + (bounds.height - dim.height)
+				/ 2);
+		nextX +=dim.width+ 10;
+		r1.y = 64;
+		r2.x = nextX;
+		g.drawImage(navImg, r1, r2);
 	}
 
 	public void setModel(Navbar model) {
