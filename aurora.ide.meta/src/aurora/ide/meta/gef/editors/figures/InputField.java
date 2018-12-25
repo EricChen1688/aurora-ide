@@ -103,12 +103,23 @@ public class InputField extends Figure implements IResourceDispose {
 		}
 
 		Image image = getImage();
-
+		/**
+		 * 修改TextField的text类型左对齐
+		 */
 		if (image != null) {
+			String type = model.getComponentType();
 			Rectangle imageR = inputRectangle.getCopy();
-			graphics.drawImage(image, getImageLocation().x,
-					getImageLocation().y, 16, 16, imageR.getTopRight().x - 18,
-					imageR.getTopRight().y, 16, 16);
+			if (Input.TEXT.equals(type)){
+				graphics.drawImage(image, getImageLocation().x,
+						getImageLocation().y, 16, 16, imageR.getTopLeft().x +4,
+						imageR.getTopRight().y, 16, 16);
+			}else{
+
+				graphics.drawImage(image, getImageLocation().x,
+						getImageLocation().y, 16, 16, imageR.getTopRight().x - 18,
+						imageR.getTopRight().y, 16, 16);
+			}
+
 		}
 	}
 

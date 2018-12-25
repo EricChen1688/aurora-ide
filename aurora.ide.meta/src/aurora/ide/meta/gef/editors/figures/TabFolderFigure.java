@@ -20,13 +20,13 @@ public class TabFolderFigure extends Figure {
 
 	@Override
 	protected void paintBorder(Graphics g) {
-		g.setForegroundColor(ColorConstants.FIELDSET_BORDER);
+		g.setForegroundColor(ColorConstants.TAB_BORDER_COLOR);
 		List<AuroraComponent> list = model.getChildren();
 		if (list.size() == 0)
 			g.drawRectangle(getBounds().getResized(-1, -1));
 		else {
 			Rectangle rect = getBounds().getResized(-1, -TabItem.HEIGHT - 2)
-					.translate(0, TabItem.HEIGHT + 1);
+					.translate(0, TabItem.HEIGHT + 8);
 			g.drawRectangle(rect);
 			g.setForegroundColor(g.getBackgroundColor());
 			TabItem currentTab = model.getCurrent();

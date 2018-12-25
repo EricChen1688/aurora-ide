@@ -12,7 +12,7 @@ import aurora.ide.meta.gef.editors.PrototypeImagesUtils;
 import aurora.plugin.source.gen.screen.model.TabItem;
 
 public class TabItemFigure extends Figure {
-	private static Image bgImg = PrototypeImagesUtils.getImage("toolbar_bg");
+	private static Image bgImg = PrototypeImagesUtils.getImage("tab_item_bg.gif");
 	private TabItem model;
 
 	public TabItemFigure() {
@@ -37,12 +37,19 @@ public class TabItemFigure extends Figure {
 		String prompt = model.getPrompt();
 		Rectangle bounds = getBounds().getCopy();
 		Point center = bounds.getCenter();
-		Dimension textExtents = FigureUtilities.getTextExtents(prompt,
-				getFont());
-		g.setForegroundColor(ColorConstants.BLACK);
+		Dimension textExtents = FigureUtilities.getTextExtents(prompt,getFont());
+		g.setForegroundColor(ColorConstants.TAB_FONT_COLOR);
+		if (model.isCurrent()) {
+			g.setForegroundColor(ColorConstants.TAB_BORDER_SELECTED);
+		}
 		g.drawText(prompt, center.translate(-textExtents.width / 2,
 				-textExtents.height / 2));
-		g.setForegroundColor(ColorConstants.FIELDSET_BORDER);
-		g.drawRoundRectangle(getBounds().getResized(-1, 1), 6, 6);
+		g.setForegroundColor(ColorConstants.TAB_BORDER_SELECTED);
+		if (!model.isCurrent()) {
+			g.setForegroundColor(ColorConstants.TAB_BORDER_COLOR);
+		}
+
+//		g.drawRoundRectangle(getBounds().getResized(-1, 1), 6, 6);
+		g.drawRoundRectangle(getBounds().getResized(-1,-2),0,0);
 	}
 }

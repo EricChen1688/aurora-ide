@@ -30,7 +30,7 @@ public class TitleBorder extends TitleBarBorder implements IResourceDispose{
 		g.pushState();
 		tempRect.setBounds(getPaintRectangle(figure, insets));
 
-		paintEtchedBorder(g, tempRect);
+//		paintEtchedBorder(g, tempRect);
 
 		Rectangle rec = tempRect;
 		rec.height = 25;
@@ -48,9 +48,12 @@ public class TitleBorder extends TitleBarBorder implements IResourceDispose{
 		y = y - getTextExtents(figure).height / 2;
 		g.setFont(getFont(figure));
 		g.setForegroundColor(getTextColor());
-		g.drawString(getLabel(), x, y);
+		g.drawString("■ "+getLabel(),x,y );
 
-		paintEtchedBorder(g, tempRect);
+//		paintEtchedBorder(g, tempRect);
+		g.setBackgroundColor(ColorConstants.BLACK);
+
+//		g.drawLine(tempRect.getBottomLeft(), tempRect.getBottomRight());
 		g.popState();
 	}
 
@@ -64,9 +67,13 @@ public class TitleBorder extends TitleBarBorder implements IResourceDispose{
 	}
 	
 	private void paintEtchedBorder(Graphics g, Rectangle r){
+//		FigureUtilities.
 		disposeResource("shadow");
 		disposeResource("highlight");
-		Color rgb = g.getBackgroundColor(), shadow = FigureUtilities.darker(rgb), highlight = FigureUtilities.lighter(rgb);
+		Color rgb = g.getBackgroundColor();
+//	    Color rgb = ColorConstants.black;	
+		Color shadow = FigureUtilities.darker(rgb);
+		Color highlight = FigureUtilities.lighter(rgb);
 		handleResource("shadow",shadow);
 		handleResource("highlight",highlight);
 		FigureUtilities.paintEtchedBorder(g, r, shadow, highlight);

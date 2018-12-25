@@ -51,7 +51,7 @@ public class ButtonFigure extends Figure implements IResourceDispose {
 		Rectangle rect = getBounds();
 		Dimension dim = BoundsConvert.getSize(model);
 		IFigure parentFigure = getParent();
-		if (!(parentFigure instanceof ToolbarFigure)) {
+//		if (!(parentFigure instanceof ToolbarFigure)) {
 			g.drawImage(bgImg, 0, 0, 3, 2, rect.x, rect.y, 3, 2);// tl
 			g.drawImage(bgImg, 0, 6, 1, 2, rect.x + 3, rect.y, dim.width - 6, 2);// tc
 			g.drawImage(bgImg, 3, 0, 3, 2, rect.x + dim.width - 3, rect.y, 3, 2);// tr
@@ -67,11 +67,12 @@ public class ButtonFigure extends Figure implements IResourceDispose {
 					rect.y + dim.height - 2, dim.width - 3, 2);// bc
 			g.drawImage(bgImg, 3, 4, 3, 2, rect.x + dim.width - 3, rect.y
 					+ dim.height - 2, 3, 2);// br
-		}
+//		}
 		String text = MessageUtil.getButtonText(model);
 		Dimension textExtents = FigureUtilities.getTextExtents(text, getFont());
-		Rectangle r1 = getStdImgRect();
-		g.setForegroundColor(ColorConstants.BLACK);
+		Rectangle r1 = null;
+		//		Rectangle r1 = getStdImgRect();
+		g.setForegroundColor(ColorConstants.WHITE);
 		if (r1 == null) {
 
 			if (TextStyleUtil.isTextLayoutUseless(this.model,

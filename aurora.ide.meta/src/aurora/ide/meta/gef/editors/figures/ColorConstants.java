@@ -11,10 +11,12 @@ public class ColorConstants implements org.eclipse.draw2d.ColorConstants {
 	public static final Color VIRTUAL_BORDER = new Color(null, 0, 0, 200);
 	public static final Color READONLY_BG = new Color(null, 219, 219, 219);
 	public static final Color REQUIRED_BG = new Color(null, 255, 249, 194);
-	public static final Color TITLETEXT = new Color(null, 5, 90, 120);
+	public static final Color TITLETEXT = new Color(null, 67, 95, 191);
 	public static final Color GRID_COLUMN_GRAY = new Color(null, 204, 204, 204);
-	public static final Color GRID_ROW = new Color(null, 237, 237, 237);
+	public static final Color GRID_ROW = new Color(null, 251, 251, 251);
 	public static final Color LINK_COLOR = new Color(null, 0, 96, 166);
 	public static final Color WRONG_COLOR = new Color(null, 249, 186, 218);
-
+	public static final Color TAB_BORDER_COLOR = new Color(null, 220, 223, 230);
+	public static final Color TAB_BORDER_SELECTED = new Color(null, 90, 127, 255);
+	public static final Color TAB_FONT_COLOR = new Color(null, 117, 134, 151);
 }

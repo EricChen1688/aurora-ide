@@ -55,7 +55,7 @@ public class ToolbarButtonFigure extends Figure implements IResourceDispose {
 		Rectangle rect = getBounds();
 		Dimension dim = BoundsConvert.getSize(model);
 		IFigure parentFigure = getParent();
-		if (!(parentFigure instanceof ToolbarFigure)) {
+//		if (!(parentFigure instanceof ToolbarFigure)) {
 			g.drawImage(bgImg, 0, 0, 3, 2, rect.x, rect.y, 3, 2);// tl
 			g.drawImage(bgImg, 0, 6, 1, 2, rect.x + 3, rect.y, dim.width - 6, 2);// tc
 			g.drawImage(bgImg, 3, 0, 3, 2, rect.x + dim.width - 3, rect.y, 3, 2);// tr
@@ -71,14 +71,14 @@ public class ToolbarButtonFigure extends Figure implements IResourceDispose {
 					rect.y + dim.height - 2, dim.width - 3, 2);// bc
 			g.drawImage(bgImg, 3, 4, 3, 2, rect.x + dim.width - 3, rect.y
 					+ dim.height - 2, 3, 2);// br
-		}
+//		}
 		String text = model.getText();
 		if ("".equals(text)) {
 			text = MessageUtil.getButtonText(model);
 		}
 
 		Dimension textExtents = FigureUtilities.getTextExtents(text, getFont());
-		g.setForegroundColor(ColorConstants.BLACK);
+		g.setForegroundColor(ColorConstants.WHITE);
 		if (hasIcon() == false) {
 			if (TextStyleUtil.isTextLayoutUseless(this.model,
 					ComponentProperties.text) == false) {
@@ -91,20 +91,38 @@ public class ToolbarButtonFigure extends Figure implements IResourceDispose {
 								+ (dim.height - textExtents.height) / 2);
 			}
 		} else {
-			Rectangle r1 = getImgRect();
-			Rectangle r2 = new Rectangle(rect.x
-					+ (dim.width - textExtents.width - 16) / 2, rect.y
-					+ (dim.height - r1.height) / 2, 16, 17);
-			g.drawImage(getBgImage(), r1, r2);
+			String btype = model.getButtonType();
+			String buttonText = getBtnText(btype);
+			
 			if (TextStyleUtil.isTextLayoutUseless(this.model,
 					ComponentProperties.text) == false) {
-				paintStyledText(g, text, ComponentProperties.text, rect.x+2
-						+ (dim.width - textExtents.width) / 2 + 8, rect.y
+				paintStyledText(g, buttonText, ComponentProperties.text, rect.x
+						+ (dim.width - textExtents.width) / 2, rect.y
 						+ (dim.height - textExtents.height) / 2);
 			} else {
-				g.drawString(text, rect.x+2 + (dim.width - textExtents.width) / 2
-						+ 8, rect.y + (dim.height - textExtents.height) / 2);
+				g.drawString(buttonText,
+						rect.x + (dim.width - textExtents.width) / 2, rect.y
+								+ (dim.height - textExtents.height) / 2);
 			}
+			
+			
+			
+			
+			//不展示图标
+//			Rectangle r1 = getImgRect();
+//			Rectangle r2 = new Rectangle(rect.x
+//					+ (dim.width - textExtents.width - 16) / 2, rect.y
+//					+ (dim.height - r1.height) / 2, 16, 17);
+//			g.drawImage(getBgImage(), r1, r2); 
+//			if (TextStyleUtil.isTextLayoutUseless(this.model,
+//					ComponentProperties.text) == false) {
+//				paintStyledText(g, text, ComponentProperties.text, rect.x+2
+//						+ (dim.width - textExtents.width) / 2 + 8, rect.y
+//						+ (dim.height - textExtents.height) / 2);
+//			} else {
+//				g.drawString(text, rect.x+2 + (dim.width - textExtents.width) / 2
+//						+ 8, rect.y + (dim.height - textExtents.height) / 2);
+//			}
 		}
 
 		// Rectangle r1 = getStdImgRect();
@@ -195,6 +213,21 @@ public class ToolbarButtonFigure extends Figure implements IResourceDispose {
 			}
 		}
 		return isStdButton(model) ? stdimg : defaultimg;
+	}
+	
+	private String getBtnText(String type){
+		String btnTxt = "button";
+		if(type.equals(Button.ADD))
+			btnTxt = "添加";
+		else if (type.equals(Button.SAVE))
+			btnTxt = "保存";
+		else if (type.equals(Button.DELETE))
+			btnTxt = "删除";
+		else if (type.equals(Button.CLEAR))
+			btnTxt = "移除";
+		else if (type.equals(Button.EXCEL))
+			btnTxt = "导出";
+		return btnTxt;
 	}
 
 	public void setModel(ToolbarButton model) {
